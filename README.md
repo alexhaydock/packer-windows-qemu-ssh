@@ -16,9 +16,9 @@ Completes all post-provisioning using Ansible over SSH. No dealing with messy/in
 * SSH enabled for remote management by Ansible.
 
 ## Prerequisites
-### Install Packer & QEMU
+### Install Packer, QEMU, and Ansible
 ```sh
-sudo dnf install -y packer qemu swtpm ansible ansible-collection-ansible-windows
+sudo dnf install -y packer qemu swtpm ansible ansible-collection-ansible-windows bsdtar
 ```
 
 ### Download `virtio-win.iso`
