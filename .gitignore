@@ -1,0 +1,6 @@
+*.fd
+*.iso
+*.qcow2
+output-*/
+packer_cache/
+virtio-win/
