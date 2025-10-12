@@ -16,23 +16,23 @@ Completes all post-provisioning using Ansible over SSH. No dealing with messy/in
 * SSH enabled for remote management by Ansible.
 
 ## Prerequisites
-### Packer & QEMU
+### Install Packer & QEMU
 ```sh
 sudo dnf install -y packer qemu swtpm ansible ansible-collection-ansible-windows
 ```
 
-### Downloaded `virtio-win.iso`
+### Download `virtio-win.iso`
 ```sh
 wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win.iso
 ```
 
-### Unpacked `virtio-win.iso`
+### Unpack `virtio-win.iso`
 ```sh
 mkdir -p virtio-win && bsdtar -xf virtio-win.iso -C virtio-win && sudo find virtio-win/ -type d -exec chmod u+rwx {} \;
 ```
 
-### Unpacked UEFI 4M firmware images
-Example for Fedora. On other distros like Debian/Ubuntu they still ship 4M UEFI images in their `ovmf` package.
+### Provide raw 4M UEFI firmware images
+Example for Fedora. On other distros like Debian/Ubuntu they still ship 4M UEFI images in their `ovmf` package. Fedora [do not anymore](https://src.fedoraproject.org/rpms/edk2/c/f9b85f6c52251927a52b61b9f814343aed66f711?branch=rawhide).
 ```sh
 qemu-img convert -O raw /usr/share/edk2/ovmf/OVMF_CODE_4M.secboot.qcow2 OVMF_CODE_4M.secboot.fd && qemu-img convert -O raw /usr/share/edk2/ovmf/OVMF_VARS_4M.secboot.qcow2 OVMF_VARS_4M.secboot.fd
 ```
