@@ -38,17 +38,18 @@ source "qemu" "win11_25h2" {
   boot_command = ["x"]
   # Press the "any key" immediately when ready,
   # since the UEFI loads into the ISO fairly quickly
-  boot_wait                 = "-1s"
-  cd_files                  = ["./autounattend/11/autounattend.xml", "./virtio-win/"]
-  communicator              = "ssh"
-  cpu_model                 = "host"
-  cpus                      = "4"
-  disk_compression          = "true"
-  disk_interface            = "virtio"
-  disk_size                 = "64G"
-  efi_drop_efivars          = "true"
-  efi_firmware_code         = "OVMF_CODE_4M.secboot.fd"
-  efi_firmware_vars         = "OVMF_VARS_4M.secboot.fd"
+  boot_wait        = "-1s"
+  cd_files         = ["./autounattend/11/autounattend.xml", "./virtio-win/"]
+  communicator     = "ssh"
+  cpu_model        = "host"
+  cpus             = "4"
+  disk_compression = "true"
+  disk_interface   = "virtio"
+  disk_size        = "64G"
+  efi_drop_efivars = "true"
+  # These EFI firmware values come from the default path on Fedora
+  efi_firmware_code         = "/usr/share/edk2/ovmf/OVMF_CODE_4M.secboot.qcow2"
+  efi_firmware_vars         = "/usr/share/edk2/ovmf/OVMF_VARS_4M.secboot.qcow2"
   format                    = "qcow2"
   headless                  = "${var.headless}"
   iso_checksum              = "${var.iso_checksum}"

@@ -36,16 +36,22 @@ This is how we'll provide the VirtIO drivers to our Windows machine. We need to 
 mkdir -p virtio-win && bsdtar -xf virtio-win.iso -C virtio-win && sudo find virtio-win/ -type d -exec chmod u+rwx {} \;
 ```
 
-### Provide raw 4M UEFI firmware images
-We need to do this because booting a VM with fully-functional Secure Boot and vTPM requires the 4M images - particularly to make sure the vTPM is actually functional, which Windows requires.
+## Building
 
-Example for Fedora. On other distros like Debian/Ubuntu they still ship 4M UEFI images in their `ovmf` package. Fedora [do not anymore](https://src.fedoraproject.org/rpms/edk2/c/f9b85f6c52251927a52b61b9f814343aed66f711?branch=rawhide).
+### Enable patched version of Packer QEMU plugin
+Needed until the project merges [this pull request](https://github.com/hashicorp/packer-plugin-qemu/pull/226) upstream.
 
 ```sh
-qemu-img convert -O raw /usr/share/edk2/ovmf/OVMF_CODE_4M.secboot.qcow2 OVMF_CODE_4M.secboot.fd && qemu-img convert -O raw /usr/share/edk2/ovmf/OVMF_VARS_4M.secboot.qcow2 OVMF_VARS_4M.secboot.fd
+git clone -b support-qcow2-firmware https://github.com/alexhaydock/packer-plugin-qemu.git
 ```
 
-## Building
+```sh
+cd packer-plugin-qemu
+```
+
+```sh
+make dev
+```
 
 ### Init Packer
 ```sh
