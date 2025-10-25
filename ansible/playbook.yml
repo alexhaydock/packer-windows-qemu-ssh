@@ -1,5 +1,5 @@
 ---
-- name: Run Windows Update on Windows host
+- name: Run post-provisioning tasks for Windows image
   hosts: all
   gather_facts: false
   vars:
