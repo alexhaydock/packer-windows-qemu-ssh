@@ -6,16 +6,8 @@
     ansible_shell_type: powershell  # Make sure Ansible knows this is Windows
 
   tasks:
-    # Updates probably already got done when adding the OpenSSH Windows
-    # Capability as part of autounattend.xml, but there's no harm in
-    # checking again just to be sure.
-    - name: Install all available Windows updates
-      ansible.windows.win_updates:
-        category_names:
-          - CriticalUpdates
-          - SecurityUpdates
-          - UpdateRollups
-        reboot: true  # Reboots as many times as needed until all updates installed
+    - name: Make sure Ansible connectivity is working
+      ansible.windows.win_shell: Write-Host "Hello World"
 
     - name: Zero out the hibernation file
       ansible.windows.win_command: powercfg /hibernate /size 0
@@ -23,7 +15,7 @@
     - name: Disable hibernation support
       ansible.windows.win_command: powercfg /hibernate off
 
-    - name: Re-enable UAC in case it is still disabled on account of autounattend.xml
+    - name: Re-enable UAC in case it is still disabled because of our autounattend.xml
       ansible.windows.win_regedit:
         path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\system
         name: EnableLUA

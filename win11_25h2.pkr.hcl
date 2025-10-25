@@ -1,13 +1,18 @@
 packer {
   required_plugins {
+    ansible = {
+      version = ">= 0.0.1"
+      source  = "github.com/hashicorp/ansible"
+    }
+
     qemu = {
       version = ">= 0.0.1"
       source  = "github.com/hashicorp/qemu"
     }
 
-    ansible = {
+    windows-update = {
       version = ">= 0.0.1"
-      source  = "github.com/hashicorp/ansible"
+      source  = "github.com/rgl/windows-update"
     }
   }
 }
@@ -76,6 +81,10 @@ build {
   # unlike the Ansible one
   provisioner "powershell" {
     inline = ["Write-Host 'hello world'"]
+  }
+
+  # Run Windows Updates
+  provisioner "windows-update" {
   }
 
   # Run Ansible to post-provision host
