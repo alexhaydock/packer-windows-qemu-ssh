@@ -72,6 +72,9 @@ source "qemu" "win11_25h2" {
   # Sysprep the VM when shutting down to generalize the SID
   # and re-enable the OOBE for the next boot
   shutdown_command = "C:\\Windows\\System32\\sysprep\\sysprep.exe /generalize /oobe /shutdown"
+
+  # Set VM name (needed to force the `.qcow2` file extension)
+  vm_name = "win11_25h2.qcow2"
 }
 
 build {
