@@ -144,7 +144,7 @@
       <OEMInformation>
         <HelpCustomized>false</HelpCustomized>
       </OEMInformation>
-      <ComputerName>Win11</ComputerName>
+      <ComputerName>*</ComputerName>
       <TimeZone>UTC</TimeZone>
       <RegisteredOwner />
     </component>
