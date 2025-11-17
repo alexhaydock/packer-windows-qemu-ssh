@@ -44,7 +44,7 @@ source "qemu" "win11_25h2" {
   # Press the "any key" immediately when ready,
   # since the UEFI loads into the ISO fairly quickly
   boot_wait        = "-1s"
-  cd_files         = ["./autounattend/11/autounattend.xml", "./virtio-win/"]
+  cd_files         = ["./autounattend/11/autounattend.xml", "./autounattend/11/unattend.xml", "./virtio-win/"]
   communicator     = "ssh"
   cpu_model        = "host"
   cpus             = "4"
@@ -63,15 +63,15 @@ source "qemu" "win11_25h2" {
   memory                    = "8192"
   net_device                = "virtio-net"
   ssh_clear_authorized_keys = "true"
-  ssh_password              = "password123"
+  ssh_password              = "correct horse battery staple"
   ssh_timeout               = "1h"
   ssh_username              = "admin"
   vga                       = "qxl"
   vtpm                      = "true"
 
   # Sysprep the VM when shutting down to generalize the SID
-  # and re-enable the OOBE for the next boot
-  shutdown_command = "C:\\Windows\\System32\\sysprep\\sysprep.exe /generalize /oobe /shutdown"
+  # and other machine-specific identifiers
+  shutdown_command = "%WINDIR%/system32/sysprep/sysprep.exe /generalize /oobe /shutdown /unattend:C:/Windows/Temp/unattend.xml"
 
   # Set VM name (needed to force the `.qcow2` file extension)
   vm_name = "win11_25h2.qcow2"

@@ -123,7 +123,7 @@
       <SetupUILanguage>
         <UILanguage>en-GB</UILanguage>
       </SetupUILanguage>
-      <InputLocale>0809:00000809</InputLocale>
+      <InputLocale>en-GB</InputLocale>
       <SystemLocale>en-GB</SystemLocale>
       <UILanguage>en-GB</UILanguage>
       <UserLocale>en-GB</UserLocale>
@@ -180,7 +180,7 @@
             <DisplayName></DisplayName>
             <Group>Administrators</Group>
             <Password>
-              <Value>password123</Value>
+              <Value>correct horse battery staple</Value>
               <PlainText>true</PlainText>
             </Password>
           </LocalAccount>
@@ -200,7 +200,7 @@
       </OOBE>
       <AutoLogon>
         <Password>
-          <Value>password123</Value>
+          <Value>correct horse battery staple</Value>
           <PlainText>true</PlainText>
         </Password>
         <Username>admin</Username>
@@ -236,6 +236,13 @@
           <Order>4</Order>
           <CommandLine>powershell -Command "Set-Content -Path $env:ProgramData\ssh\sshrc.ps1 -Value '' ; Set-Content -Path $env:ProgramData\ssh\shell.ps1 -Value 'powershell.exe -NoLogo' ; if (-not (Test-Path $env:ProgramData\ssh\sshd_config)) {Copy-Item $env:ProgramFiles\OpenSSH\sshd_config_default $env:ProgramData\ssh\sshd_config} ; (Get-Content $env:ProgramData\ssh\sshd_config) -replace '#?ForceCommand .*', 'ForceCommand powershell.exe' | Set-Content $env:ProgramData\ssh\sshd_config; Restart-Service sshd"</CommandLine>
           <Description>Set PowerShell as the default SSH shell</Description>
+          <RequiresUserInput>false</RequiresUserInput>
+        </SynchronousCommand>
+        <!-- Copy unattend.xml to a static temp directory -->
+        <SynchronousCommand wcm:action="add">
+          <Order>5</Order>
+          <CommandLine>powershell -Command "if (-not (Test-Path 'C:\Windows\Temp')) { New-Item -Path 'C:\Windows\Temp' -ItemType Directory } ; Copy-Item -Path 'E:\unattend.xml' -Destination 'C:\Windows\Temp\unattend.xml' -Force"</CommandLine>
+          <Description>Copy unattend.xml to C:\Windows\Temp</Description>
           <RequiresUserInput>false</RequiresUserInput>
         </SynchronousCommand>
       </FirstLogonCommands>

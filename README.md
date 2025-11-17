@@ -69,7 +69,11 @@ packer build win11_25h2.pkr.hcl
 The default username and password for the images is:
 
 ```text
-admin:password123
+admin
+```
+
+```text
+correct horse battery staple
 ```
 
 ### Image Output
